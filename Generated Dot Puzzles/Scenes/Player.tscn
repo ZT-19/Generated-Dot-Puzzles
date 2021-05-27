@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Sprites/PlayerOutlineSprite1.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/Player.gd" type="Script" id=2]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 12.8843
+
+[node name="Player" type="Node2D"]
+position = Vector2( 128, 128 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 0.05, 0.05 )
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+scale = Vector2( 0.5, 0.5 )
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+enabled = true
+collision_mask = 2147483649
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="KinematicBody2D" type="KinematicBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
+shape = SubResource( 1 )
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
